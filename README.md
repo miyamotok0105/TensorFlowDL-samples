@@ -28,3 +28,12 @@ TensorFlowではじめるDeepLearning実践入門　サンプルコード
 # 正誤表
 
 - 124ページ中段数式　（誤）z * -log(x) + (1-z) * -log(1-x') -> (正) z * -log(x) + (1-z) * -log(1-x)
+
+# メモ
+
+- ch03    
+
+https://www.cs.toronto.edu/~kriz/cifar.html
+https://gist.github.com/katsugeneration/6fa6bdafb36cc667caea6c54cc7bfed6
+
+
