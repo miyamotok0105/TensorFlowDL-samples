@@ -2,6 +2,7 @@
 
 import tensorflow as tf
 import dataset_utils
+
 import os
 # Base url
 TF_MODELS_URL = "http://download.tensorflow.org/models/"
@@ -127,5 +128,8 @@ predict('bison.jpg', version='V3')
 
 # predict('bison.jpg', version='V4')
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 507ac9762ea3e071ed642d591827649b3dce2134
