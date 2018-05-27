@@ -25,7 +25,7 @@ if not os.path.exists(INCEPTION_V4_CKPT_PATH):
     dataset_utils.download_and_uncompress_tarball(INCEPTION_V4_URL, MODELS_DIR)
 
 #Processing Images
-from preprocessing import inception_preprocessing
+import inception_preprocessing
 # This can be modified depending on the model used and the training image dataset
 def process_image(image):
     root_dir = "images/"
@@ -67,12 +67,16 @@ def process_image(image):
 # plot_color_image(raw_sombrero)
 
 
+import imagenet
+import inception_v3
+import inception_v4
 
 def predict(image, version='V3'):
     tf.reset_default_graph()
     
     # Process the image 
     raw_image, processed_image = process_image(image)
+    print(raw_image.shape)
     class_names = imagenet.create_readable_names_for_imagenet_labels()
     
     # Create a placeholder for the images
@@ -84,23 +88,25 @@ def predict(image, version='V3'):
     '''
     
     if version.upper() == 'V3':
+        print("V3!!")
         model_ckpt_path = INCEPTION_V3_CKPT_PATH
-        with slim.arg_scope(inception.inception_v3_arg_scope()):
+        with tf.contrib.slim.arg_scope(inception_v3.inception_v3_arg_scope()):
             # Set the number of classes and is_training parameter  
-            logits, end_points = inception.inception_v3(X, num_classes=1001, is_training=False)
+            logits, end_points = inception_v3.inception_v3(X, num_classes=1001, is_training=False)
             
     elif version.upper() == 'V4':
         model_ckpt_path = INCEPTION_V4_CKPT_PATH
-        with slim.arg_scope(inception.inception_v3_arg_scope()):
+        with tf.contrib.slim.arg_scope(inception_v4.inception_v4_arg_scope()):
             # Set the number of classes and is_training parameter
             # Logits 
-            logits, end_points = inception.inception_v4(X, num_classes=1001, is_training=False)
+            logits, end_points = inception_v4.inception_v4(X, num_classes=1001, is_training=False)
             
     
     predictions = end_points.get('Predictions', 'No key named predictions')
     saver = tf.train.Saver()
     
     with tf.Session() as sess:
+        print("model_ckpt_path", model_ckpt_path)
         saver.restore(sess, model_ckpt_path)
         prediction_values = predictions.eval({X: processed_image})
         
@@ -110,8 +116,8 @@ def predict(image, version='V3'):
         prediction_values = sorted(prediction_values, key=lambda x: x[1], reverse=True)
         
         # Plot the image
-        plot_color_image(raw_image)
-        plt.show()
+        #plot_color_image(raw_image)
+        #plt.show()
         print("Using Inception_{} CNN\nPrediction: Probability\n".format(version))
         # Display the image and predictions 
         for i in range(10):
@@ -124,12 +130,7 @@ def predict(image, version='V3'):
         print(predictions)
 
 
-predict('bison.jpg', version='V3')
+print(predict('bison.jpg', version='V3'))
 
 # predict('bison.jpg', version='V4')
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 507ac9762ea3e071ed642d591827649b3dce2134
