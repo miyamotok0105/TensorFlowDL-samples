@@ -37,3 +37,5 @@ https://www.cs.toronto.edu/~kriz/cifar.html
 https://gist.github.com/katsugeneration/6fa6bdafb36cc667caea6c54cc7bfed6
 
 
+
+
