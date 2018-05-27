@@ -6,7 +6,7 @@ import inception_v3 as iv3
 FLAGS = tf.flags.FLAGS
 tf.flags.DEFINE_string("ckpt_file", 'ckpt/inception_v3.ckpt', "Inception-v3 checkpoint file.")
 tf.flags.DEFINE_string('log_dir', 'logs/', "TensorBoard log directory.")
-tf.flags.DEFINE_string('output_dir', './', "Output directory.")
+tf.flags.DEFINE_string('output_dir', './ckpt/', "Output directory.")
 tf.flags.DEFINE_string('output_file', 'inception_v3.pb', "Output file name.")
 
 #　Inception-v3を読み込み

@@ -76,6 +76,7 @@ def build_input(pattern, repeat_count=None ,shuffle=True):
         dataset = dataset.shuffle(1000)
     #キャプションデータ長の不均衡を0でpaddingしてミニバッチを作成
     padded_shapes = (tf.TensorShape([300,300,3]), tf.TensorShape([]), tf.TensorShape([None]), tf.TensorShape([None]))
+    #padded_shapes = (tf.TensorShape([299,299,3]), tf.TensorShape([]), tf.TensorShape([None]), tf.TensorShape([None]))
     dataset = dataset.padded_batch(FLAGS.batch_size, padded_shapes=padded_shapes)
 
     #repeatで指定した回数までループするiteratorを作成
@@ -202,6 +203,8 @@ def main(argv):
     with train_graph.as_default():
         #訓練の入力はDataSetAPIを用いたパイプ
         img , lengths, decoder_input, correct = build_input('train-*')
+        print("img ", img.shape)
+        print("decoder_input", decoder_input.shape)
         #画像組み込み
         train_embedding = build_img_embedding(img, embedding_size)
         #キャプション生成

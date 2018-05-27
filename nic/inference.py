@@ -7,7 +7,7 @@ from PIL import Image
 FLAGS = tf.flags.FLAGS
 tf.flags.DEFINE_string('target_img', '', "Target image file path.")
 tf.flags.DEFINE_string('dictionary_path', 'data/dictionary.txt', "Dictionary file path.")
-tf.flags.DEFINE_string('inference_pb', 'im2txt.pb', "Inference Graph pb file path.")
+tf.flags.DEFINE_string('inference_pb', 'create_inception_v3/im2txt.pb', "Inference Graph pb file path.")
 
 
 #辞書ファイルの読み込み
